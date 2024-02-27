@@ -1,0 +1,44 @@
+specVersion: 0.0.2
+description: Pancake Profile
+repository: https://github.com/pancakeswap
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Profile
+    network: mainnet
+    source:
+      address: '0x6A42dAEbB9058004624dC16e67F73fb90497A08A'
+      abi: Profile
+      startBlock: 12319900
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./mappings/index.ts
+      entities:
+        - Team
+        - User
+        - Points
+      abis:
+        - name: Profile
+          file: ./abis/Profile.json
+      eventHandlers:
+        - event: TeamAdd(uint256,string)
+          handler: handleTeamAdd
+        - event: TeamPointIncrease(indexed uint256,uint256,indexed uint256)
+          handler: handleTeamPointIncrease
+        - event: UserNew(indexed address,uint256,address,uint256)
+          handler: handleUserNew
+        - event: UserUpdate(indexed address,address,uint256)
+          handler: handleUserUpdate
+        - event: UserPause(indexed address,uint256)
+          handler: handleUserPause
+        - event: UserReactivate(indexed address,uint256,address,uint256)
+          handler: handleUserReactivate
+        - event: UserChangeTeam(indexed address,uint256,uint256)
+          handler: handleUserChangeTeam
+        - event: UserPointIncrease(indexed address,uint256,indexed uint256)
+          handler: handleUserPointIncrease
+        - event: UserPointIncreaseMultiple(address[],uint256,indexed uint256)
+          handler: handleUserPointIncreaseMultiple

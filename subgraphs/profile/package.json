@@ -1,0 +1,15 @@
+{
+  "name": "profile",
+  "description": "PancakeSwap Subgraph",
+  "version": "1.0.0",
+  "repository": "git@github.com:pancakeswap/pancake-subgraph.git",
+  "author": "PancakeSwap",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "codegen": "graph codegen subgraph.yaml",
+    "build": "graph build subgraph.yaml",
+    "local": "graph create Towerswap-profile --node http://127.0.0.1:8020 subgraph.yaml",
+    "deploy:local": "graph deploy Towerswap-profile --ipfs http://127.0.0.1:5001 --node http://127.0.0.1:8020 subgraph.yaml",
+    "deploy": "graph deploy --product hosted-service --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ smartdev1990/new-graph subgraph.yaml"
+  }
+}
